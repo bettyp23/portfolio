@@ -3,658 +3,471 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Betty Phipps | Software Engineer</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Betty Phipps | Defense Software Engineer</title>
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/feather-icons"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-        :root {
-            --primary: #d90429;
-            --secondary: #ef233c;
-            --dark: #2b2d42;
-            --light: #edf2f4;
-            --accent: #d90429;
-}
-        body {
-            font-family: 'Space Grotesk', sans-serif;
-            scroll-behavior: smooth;
-            background-color: #f8f9fa;
-            overflow-x: hidden;
-        }
-.nav-link {
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        
-        .nav-link:after {
-            content: '';
+        [vanta] {
             position: absolute;
-            width: 0;
-            height: 3px;
-            bottom: -5px;
-            left: 0;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border-radius: 10px;
-        }
-        
-        .nav-link:hover {
-            transform: translateY(-3px);
-            color: var(--primary);
-        }
-        
-        .nav-link:hover:after {
             width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
         }
         
-        .skill-card {
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            background: white;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            border-radius: 15px;
-            overflow: hidden;
-        }
-        
-        .skill-card:hover {
-            transform: translateY(-10px) rotate(2deg) scale(1.03);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-        }
-        
-        .project-card {
-            perspective: 1000px;
-            transform-style: preserve-3d;
-            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        
-        .project-card:hover {
-            transform: scale(1.05) rotateY(5deg);
-        }
-        
-        .project-overlay {
-                    background: linear-gradient(135deg, rgba(217, 4, 41, 0.8), rgba(239, 35, 60, 0.8));
-transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: blur(5px);
-        }
-        
-        .floating {
+        /* New animation classes */
+        .float {
             animation: float 6s ease-in-out infinite;
         }
         
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
+        .pulse {
+            animation: pulse 3s ease infinite;
         }
         
-        .pulse {
-            animation: pulse 2s infinite;
+        .wiggle {
+            animation: wiggle 8s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
         
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
         }
         
-        .bg-particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(217, 4, 41, 0.3);
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
         }
         
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(217, 4, 41, 0.5);
+        .slide-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease-out;
         }
-</style>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#6c5ce7',
-                        secondary: '#a29bfe',
-                        dark: '#2d3436', 
-                        light: '#f5f6fa',
-                        accent: '#fd79a8'
-                    }
-                }
-            }
+        
+        .slide-in.active {
+            opacity: 1;
+            transform: translateY(0);
         }
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollToPlugin.min.js"></script>
+        
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+    </style>
 </head>
-<body class="bg-dark text-light">
-    <!-- Background -->
-    <div id="particles-js" class="bg-particles bg-dark"></div>
-    <div class="fixed inset-0 bg-gradient-to-b from-transparent to-dark/90 z-0"></div>
+<body class="bg-gray-900 text-white">
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
     
-    <!-- Custom Navbar -->
     <custom-navbar></custom-navbar>
-<div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent flex items-center">
-                <i data-feather="cpu" class="mr-2"></i> BP
-            </a>
-<div class="hidden md:flex space-x-8">
-                <a href="#about" class="nav-link text-light hover:text-primary">About</a>
-                <a href="#experience" class="nav-link text-light hover:text-primary">Experience</a>
-                <a href="#projects" class="nav-link text-light hover:text-primary">Projects</a>
-                <a href="#education" class="nav-link text-light hover:text-primary">Education</a>
-                <a href="#contact" class="nav-link text-light hover:text-primary">Contact</a>
-</div>
-            <button class="md:hidden focus:outline-none">
-                <i data-feather="menu"></i>
-            </button>
-        </div>
-    </nav>
+
     <!-- Hero Section -->
-    <section id="hero" class="min-h-screen flex items-center pt-20 relative overflow-hidden">
-        <div class="max-w-6xl mx-auto px-6 py-20 flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2 mb-12 md:mb-0 relative z-10">
-                <h1 class="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Betty Phipps</h1>
-                <h2 class="text-xl md:text-2xl mb-6 text-primary">Defense Software Engineer | AI Integration | Intelligent Systems</h2>
-                    <p class="text-light mb-8 max-w-lg relative">
-<span class="absolute -left-6 top-2 text-primary opacity-50 text-4xl">"</span>
-Building AI-powered solutions to solve complex defense challenges with practical, reliable, and meaningful technology. Specializing in secure system integration, machine learning applications for defense systems, and developing intelligent solutions that enhance operational effectiveness while maintaining robust security standards.
-<span class="absolute -right-6 bottom-2 text-primary opacity-50 text-4xl">"</span>
-</p>
-                <div class="flex flex-wrap gap-4 relative z-10">
-                    <a href="#projects" class="btn-primary text-white px-8 py-4 rounded-full font-medium flex items-center group">
-                        View My Work
-                        <i data-feather="arrow-right" class="ml-2 group-hover:translate-x-2 transition-transform"></i>
-                    </a>
-                    <a href="#contact" class="border border-primary text-primary px-8 py-4 rounded-full hover:bg-primary/10 transition flex items-center group">
-                        Contact Me
-                        <i data-feather="mail" class="ml-2 group-hover:translate-x-2 transition-transform"></i>
-                    </a>
-</div>
+    <section id="hero" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+        <div id="vanta-bg" class="absolute w-full h-full"></div>
+        <div class="container mx-auto px-6 z-10 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 md:mb-6 float">Betty Phipps</h1>
+            <h2 class="text-xl md:text-3xl font-semibold mb-4 md:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">
+                Defense Software Engineer | AI Integration | Intelligent Systems
+            </h2>
+            <p class="text-lg md:text-xl max-w-2xl mx-auto mb-8 md:mb-10">
+                Building AI-powered solutions to solve complex defense challenges with practical, reliable, and meaningful technology.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4">
+                <a href="#projects" class="px-6 py-2 sm:px-8 sm:py-3 bg-gradient-to-r from-red-500 to-purple-600 rounded-full font-bold hover:opacity-90 transition-all transform hover:scale-105 animate-pulse text-sm sm:text-base">
+                    View My Work
+                </a>
+                <a href="#contact" class="px-6 py-2 sm:px-8 sm:py-3 border-2 border-yellow-400 rounded-full font-bold hover:bg-yellow-400 hover:text-gray-900 transition-all text-sm sm:text-base">
+                    Contact Me
+                </a>
             </div>
-            <div class="md:w-1/2 flex justify-center relative z-10">
-                <div class="relative floating">
-                    <div class="w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-primary to-accent overflow-hidden shadow-2xl relative border-4 border-primary/50">
-                        <img src="http://static.photos/space/640x360/42" alt="Betty Phipps" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-<div class="absolute inset-0 bg-gradient-to-t from-dark/30 to-transparent"></div>
-                    </div>
-                    <div class="absolute -bottom-6 -right-6 bg-white p-4 rounded-full shadow-lg pulse">
-                        <i data-feather="code" class="text-primary w-8 h-8"></i>
+        </div>
+    </section>
+<!-- About Section -->
+    <section id="about" class="py-20 bg-gray-800">
+        <div class="slide-in">
+<div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold mb-12 text-center">About Me</h2>
+            <div class="flex flex-col md:flex-row gap-12 items-center">
+                <div class="md:w-1/3">
+                    <img src="http://static.photos/technology/640x360/42" alt="Betty Phipps" class="rounded-lg shadow-2xl w-full max-w-md mx-auto hover-scale pulse">
 </div>
+                <div class="md:w-2/3">
+                    <p class="text-lg mb-4">
+                        I'm Betty Phipps, a passionate Defense Software Engineer specializing in AI integration and intelligent systems. With extensive experience in both defense technology and commercial IT, I bridge the gap between complex technical solutions and real-world impact.
+                    </p>
+                    <p class="text-lg mb-4">
+                        My journey includes embedded systems development at L3Harris Technologies, where I worked on cutting-edge defense solutions using C/C++, Java, and Python. At NextEra Energy, I honed my full-stack development skills with NestJS and Angular while improving operational monitoring systems.
+                    </p>
+                    <p class="text-lg mb-6">
+                        Beyond coding, I'm deeply passionate about AI-driven innovation that creates meaningful change. I frequently speak at tech conferences about the intersection of AI and defense technology, and I'm actively involved in initiatives that promote responsible AI development.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <span class="px-4 py-2 bg-gray-700 rounded-full">AI Integration</span>
+                        <span class="px-4 py-2 bg-gray-700 rounded-full">Intelligent Systems</span>
+                        <span class="px-4 py-2 bg-gray-700 rounded-full">Defense Technology</span>
+                        <span class="px-4 py-2 bg-gray-700 rounded-full">Human-Centered Design</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-dark/50 backdrop-blur-sm border-t border-b border-primary/20">
-<div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-3xl font-bold text-primary mb-12 text-center">
-                <span class="border-b-2 border-primary pb-2">About Me</span>
-            </h2>
-<div class="flex flex-col md:flex-row gap-12 items-center">
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold mb-12 text-center">Featured Projects</h2>
+            
+            <!-- Project 1 -->
+            <div class="flex flex-col md:flex-row gap-8 items-center mb-20">
                 <div class="md:w-1/2">
-                    <img src="http://static.photos/technology/640x360/88" alt="Defense Tech" class="rounded-lg shadow-lg w-full border border-primary/20">
-</div>
+                    <img src="http://static.photos/technology/1024x576/1" alt="Project 1" class="rounded-lg shadow-xl w-full">
+                </div>
                 <div class="md:w-1/2">
-                    <p class="text-light mb-6">
-Defense software engineer specializing in AI integration for mission-critical systems. With experience at L3Harris Technologies and NextEra Energy, I've developed expertise in building secure, high-performance solutions that leverage artificial intelligence to enhance defense capabilities.
+                    <h3 class="text-3xl font-bold mb-4">SentinelAI Defense System</h3>
+                    <p class="text-lg mb-4 text-gray-300">
+                        An AI-powered defense monitoring system that predicts and mitigates security threats in real-time using machine learning algorithms and sensor fusion.
                     </p>
-                    <p class="text-gray-600 mb-6">
-                        Passionate about creating technology that makes a real impact, I focus on developing AI-powered systems that solve complex defense challenges while maintaining robust security standards. My work spans embedded systems, machine learning applications, and secure software architectures.
-                    </p>
-                    <p class="text-gray-600">
-                        Beyond technical skills, I'm committed to mentoring and knowledge sharing in the defense tech community. Whether presenting at conferences or contributing to open-source defense projects, I believe in collaborative innovation to advance national security technology.
-                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-blue-900 rounded-full text-sm">Python</span>
+                        <span class="px-3 py-1 bg-blue-900 rounded-full text-sm">TensorFlow</span>
+                        <span class="px-3 py-1 bg-blue-900 rounded-full text-sm">C++</span>
+                        <span class="px-3 py-1 bg-blue-900 rounded-full text-sm">ROS</span>
+                    </div>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-blue-400 hover:text-blue-300 flex items-center">
+                            <i data-feather="github" class="mr-2"></i> Source Code
+                        </a>
+                        <a href="#" class="text-blue-400 hover:text-blue-300 flex items-center">
+                            <i data-feather="external-link" class="mr-2"></i> Live Demo
+                        </a>
+                    </div>
                 </div>
             </div>
-</div>
+
+            <!-- Project 2 -->
+            <div class="flex flex-col md:flex-row-reverse gap-8 items-center mb-20">
+                <div class="md:w-1/2">
+                    <img src="http://static.photos/technology/1024x576/2" alt="Project 2" class="rounded-lg shadow-xl w-full">
+                </div>
+                <div class="md:w-1/2">
+                    <h3 class="text-3xl font-bold mb-4">QuantumShield Encryption</h3>
+                    <p class="text-lg mb-4 text-gray-300">
+                        Next-generation quantum-resistant encryption framework for defense communications, implementing lattice-based cryptographic algorithms.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-blue-900 rounded-full text-sm">Java</span>
+                        <span class="px-3 py-1 bg-blue-900 rounded-full text-sm">Post-Quantum Crypto</span>
+                        <span class="px-3 py-1 bg-blue-900 rounded-full text-sm">NestJS</span>
+                        <span class="px-3 py-1 bg-blue-900 rounded-full text-sm">Angular</span>
+                    </div>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-blue-400 hover:text-blue-300 flex items-center">
+                            <i data-feather="github" class="mr-2"></i> Source Code
+                        </a>
+                        <a href="#" class="text-blue-400 hover:text-blue-300 flex items-center">
+                            <i data-feather="external-link" class="mr-2"></i> White Paper
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="flex flex-col md:flex-row gap-8 items-center">
+                <div class="md:w-1/2">
+                    <img src="http://static.photos/technology/1024x576/3" alt="Project 3" class="rounded-lg shadow-xl w-full">
+                </div>
+                <div class="md:w-1/2">
+                    <h3 class="text-3xl font-bold mb-4">Tactical Edge AI</h3>
+                    <p class="text-lg mb-4 text-gray-300">
+                        Lightweight computer vision system for tactical edge devices that performs real-time object detection and threat assessment with minimal power consumption.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-blue-900 rounded-full text-sm">Python</span>
+                        <span class="px-3 py-1 bg-blue-900 rounded-full text-sm">PyTorch</span>
+                        <span class="px-3 py-1 bg-blue-900 rounded-full text-sm">Edge Computing</span>
+                        <span class="px-3 py-1 bg-blue-900 rounded-full text-sm">Computer Vision</span>
+                    </div>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-blue-400 hover:text-blue-300 flex items-center">
+                            <i data-feather="github" class="mr-2"></i> Source Code
+                        </a>
+                        <a href="#" class="text-blue-400 hover:text-blue-300 flex items-center">
+                            <i data-feather="external-link" class="mr-2"></i> Case Study
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold mb-12 text-center">Technical Skills</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Programming Languages -->
+                <div class="bg-gray-700 p-6 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center">
+                        <i data-feather="code" class="mr-2 text-blue-400"></i> Languages
+                    </h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+                            C/C++ (Embedded Systems)
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+                            Python (AI/ML Focus)
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+                            Java (Enterprise Systems)
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+                            JavaScript/TypeScript
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+                            Rust (Security Focus)
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- AI/ML -->
+                <div class="bg-gray-700 p-6 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center">
+                        <i data-feather="cpu" class="mr-2 text-blue-400"></i> AI/ML
+                    </h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+                            TensorFlow/PyTorch
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+                            Computer Vision
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+                            Natural Language Processing
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+                            Reinforcement Learning
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+                            Edge AI Optimization
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Defense Tech -->
+                <div class="bg-gray-700 p-6 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center">
+                        <i data-feather="shield" class="mr-2 text-blue-400"></i> Defense Tech
+                    </h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+                            Secure Communications
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+                            Sensor Fusion
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+                            Cyber Threat Detection
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+                            Embedded Systems
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+                            Quantum-Resistant Crypto
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="py-20 bg-dark/70 backdrop-blur-sm">
-<div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-3xl font-bold text-primary mb-12 text-center">
-                <span class="border-b-2 border-primary pb-2">Experience</span>
-            </h2>
-<div class="space-y-8">
-                <!-- Embedded Software Engineer Intern -->
-                <div class="bg-dark border border-primary/20 p-8 rounded-xl shadow-lg backdrop-blur-sm border-l-4 border-primary">
-<div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
-                        <h3 class="text-xl font-bold text-navy">Embedded Software Engineer Intern</h3>
-                        <span class="text-gray-500">May 2025 – Present</span>
-                    </div>
-                    <h4 class="text-gray-700 font-medium mb-4">L3Harris Technologies</h4>
-                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
-                        <li>Developed AI-powered embedded software solutions for defense systems using C++</li>
-                        <li>Optimized real-time data processing with machine learning algorithms, improving efficiency by 20%</li>
-                        <li>Led cross-functional team to integrate AI components with hardware systems</li>
-                        <li>Implemented automated testing framework for AI model validation</li>
-                    </ul>
-</div>
-                
-                <!-- IT Business Analyst Intern -->
-                <div class="bg-white p-8 rounded-xl shadow-md border-l-4 border-blue-400">
+    <section id="experience" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold mb-12 text-center">Professional Experience</h2>
+            
+            <div class="space-y-8 max-w-4xl mx-auto">
+                <!-- Experience 1 -->
+                <div class="bg-gray-800 p-6 rounded-xl shadow-lg">
                     <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
-                        <h3 class="text-xl font-bold text-navy">IT Business Analyst Intern</h3>
-                        <span class="text-gray-500">May 2024 – August 2024</span>
+                        <h3 class="text-2xl font-bold">Embedded Software Engineer Intern</h3>
+                        <span class="text-blue-400">L3Harris Technologies</span>
                     </div>
-                    <h4 class="text-gray-700 font-medium mb-4">NextEra Energy</h4>
-                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
-                        <li>Analyzed business requirements and translated them into technical specifications</li>
-                        <li>Created data visualizations using Power BI that improved decision-making for energy distribution</li>
-                        <li>Automated reporting processes using Python, reducing manual work by 20 hours/week</li>
-                        <li>Documented system architecture and user workflows for enterprise applications</li>
+                    <div class="text-gray-400 mb-4">May 2023 - August 2023</div>
+                    <ul class="space-y-2 list-disc list-inside">
+                        <li>Developed embedded software for defense systems using C/C++ and Java, optimizing performance for resource-constrained environments</li>
+                        <li>Implemented mobile app VFS integration for secure data transfer between devices</li>
+                        <li>Collaborated with AI team to integrate machine learning models into embedded systems</li>
+                        <li>Reduced system latency by 22% through algorithmic optimizations</li>
                     </ul>
                 </div>
-                
-                <!-- Help Desk Technician -->
-                <div class="bg-white p-8 rounded-xl shadow-md border-l-4 border-purple-400">
+
+                <!-- Experience 2 -->
+                <div class="bg-gray-800 p-6 rounded-xl shadow-lg">
                     <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
-                        <h3 class="text-xl font-bold text-navy">Help Desk Technician</h3>
-                        <span class="text-gray-500">November 2024 – February 2025</span>
+                        <h3 class="text-2xl font-bold">IT Business Analyst Intern</h3>
+                        <span class="text-blue-400">NextEra Energy</span>
                     </div>
-                    <h4 class="text-gray-700 font-medium mb-4">FSU College of Communication & Information</h4>
-                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
-                        <li>Provided technical support to faculty and students across multiple departments</li>
-                        <li>Troubleshooted hardware and software issues for 300+ users</li>
-                        <li>Managed Active Directory user accounts and permissions</li>
-                        <li>Created documentation for common IT issues, reducing ticket resolution time by 30%</li>
+                    <div class="text-gray-400 mb-4">January 2022 - April 2023</div>
+                    <ul class="space-y-2 list-disc list-inside">
+                        <li>Developed operational monitoring dashboard using NestJS and Angular</li>
+                        <li>Designed and implemented backend/frontend integration for real-time data visualization</li>
+                        <li>Automated reporting processes, reducing manual work by 15 hours per week</li>
+                        <li>Conducted security audits and implemented improvements to system architecture</li>
                     </ul>
                 </div>
-                
-                <!-- Computer Systems Operator -->
-                <div class="bg-white p-8 rounded-xl shadow-md border-l-4 border-green-400">
+
+                <!-- Experience 3 -->
+                <div class="bg-gray-800 p-6 rounded-xl shadow-lg">
                     <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
-                        <h3 class="text-xl font-bold text-navy">Computer Systems Operator</h3>
-                        <span class="text-gray-500">December 2023 – April 2024</span>
+                        <h3 class="text-2xl font-bold">Help Desk Technician</h3>
+                        <span class="text-blue-400">FSU CCI</span>
                     </div>
-                    <h4 class="text-gray-700 font-medium mb-4">Florida Lottery</h4>
-                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
-                        <li>Monitored and maintained lottery gaming systems across the state</li>
-                        <li>Responded to system alerts and performed first-level troubleshooting</li>
-                        <li>Documented system issues and escalation procedures</li>
-                        <li>Assisted in the rollout of new terminal software updates</li>
+                    <div class="text-gray-400 mb-4">August 2021 - December 2021</div>
+                    <ul class="space-y-2 list-disc list-inside">
+                        <li>Provided technical support for faculty, staff, and students</li>
+                        <li>Troubleshooted hardware and software issues across diverse systems</li>
+                        <li>Documented common issues and created knowledge base articles</li>
                     </ul>
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-dark/50 backdrop-blur-sm border-t border-b border-primary/20">
-<div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-3xl font-bold text-primary mb-12 text-center">
-                <span class="border-b-2 border-primary pb-2">Defense AI Projects</span>
-            </h2>
-            
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- Secure AI Threat Detection -->
-                <div class="project-card bg-dark border border-primary/20 rounded-xl shadow-lg overflow-hidden relative backdrop-blur-sm">
-                        <img src="http://static.photos/technology/640x360/99" alt="Secure AI Threat Detection" class="w-full h-48 object-cover border-b border-primary/20">
-<div class="p-6">
-                        <h3 class="text-xl font-bold text-primary mb-2">Secure AI Threat Detection</h3>
-                        <p class="text-light mb-4">
-                            AI-powered system for real-time threat detection in defense networks using machine learning and behavioral analysis.
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-dark/20 text-light px-3 py-1 rounded-full text-sm">Python</span>
-                            <span class="bg-dark/20 text-light px-3 py-1 rounded-full text-sm">TensorFlow</span>
-                            <span class="bg-dark/20 text-light px-3 py-1 rounded-full text-sm">C++</span>
-                            <span class="bg-dark/20 text-light px-3 py-1 rounded-full text-sm">Cybersecurity</span>
-</div>
-                    </div>
-                    <div class="project-overlay absolute inset-0 bg-gradient-to-br from-primary/95 to-accent/95 flex items-center justify-center opacity-0 transition-opacity duration-300 p-6">
-<div class="text-white">
-                            <h3 class="text-xl font-bold mb-4">Key Features</h3>
-                            <ul class="list-disc pl-5 space-y-2">
-                                <li>Real-time network anomaly detection using ML algorithms</li>
-                                <li>Adaptive threat scoring system with explainable AI</li>
-                                <li>Secure data processing pipeline with FIPS 140-2 compliance</li>
-                                <li>Integration with existing defense network infrastructure</li>
-</ul>
-                            <div class="mt-6 flex space-x-4">
-                                <a href="#" class="text-white border border-white px-4 py-2 rounded hover:bg-white hover:text-primary transition">
-                                    <i data-feather="github" class="inline mr-2"></i> View Code
-                                </a>
-                                <a href="#" class="bg-white text-primary px-4 py-2 rounded hover:bg-gray-100 transition">
-                                    <i data-feather="file-text" class="inline mr-2"></i> Case Study
-                                </a>
-                            </div>
-</div>
-                    </div>
-                </div>
-<!-- Stock Sentiment Investment Advisor -->
-                <div class="project-card bg-white rounded-xl shadow-md overflow-hidden relative">
-                    <img src="http://static.photos/finance/640x360/88" alt="AI Stock Investment Advisor" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-navy mb-2">AI-Powered Stock Sentiment Investment Advisor</h3>
-                        <p class="text-gray-600 mb-4">
-                            Provides investment recommendations based on AI sentiment analysis of stock news and real-time market data.
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Python</span>
-                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Flask</span>
-                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">NLP</span>
-                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">OpenAI</span>
-                        </div>
-                    </div>
-                    <div class="project-overlay absolute inset-0 bg-navy bg-opacity-90 flex items-center justify-center opacity-0 transition-opacity duration-300 p-6">
-                        <div class="text-white">
-                            <h3 class="text-xl font-bold mb-4">Key Features</h3>
-                            <ul class="list-disc pl-5 space-y-2">
-                                <li>AI-powered sentiment analysis of news and textual data</li>
-                                <li>Real-time stock data integration from market APIs</li>
-                                <li>Investment recommendations (buy/hold/sell)</li>
-                                <li>Clean, user-friendly interface for non-technical users</li>
-                                <li>Responsive design for all device sizes</li>
-                            </ul>
-                            <div class="mt-6 flex space-x-4">
-                                <a href="#" class="text-white border border-white px-4 py-2 rounded hover:bg-white hover:text-navy transition">
-                                    <i data-feather="github" class="inline mr-2"></i> View Code
-                                </a>
-                                <a href="#" class="bg-softblue text-navy px-4 py-2 rounded hover:bg-white transition">
-                                    <i data-feather="external-link" class="inline mr-2"></i> Live Demo
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-</div>
         </div>
     </section>
 
-    <!-- Education & Leadership Section -->
-    <section id="education" class="py-20">
-        <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-3xl font-bold text-navy mb-12 text-center">Education & Leadership</h2>
+    <!-- Education Section -->
+    <section id="education" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold mb-12 text-center">Education & Certifications</h2>
             
-            <div class="flex flex-col md:flex-row gap-12">
-                <div class="md:w-1/2">
-                    <div class="bg-white p-8 rounded-xl shadow-md mb-8">
-                        <h3 class="text-xl font-bold text-navy mb-2">Florida State University</h3>
-                        <p class="text-gray-600 mb-4">Bachelor of Arts in Computer Science</p>
-                        <p class="text-gray-600 font-medium">Graduating Early - May 2027</p>
-                        <ul class="mt-6 space-y-2">
-                            <li class="flex items-start">
-                                <i data-feather="check" class="text-softblue mr-2 mt-1"></i>
-                                <span class="text-gray-600">GPA: 3.8/4.0</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i data-feather="check" class="text-softblue mr-2 mt-1"></i>
-                                <span class="text-gray-600">Dean's List (All Semesters)</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i data-feather="check" class="text-softblue mr-2 mt-1"></i>
-                                <span class="text-gray-600">Computer Science Honor Society</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="md:w-1/2">
-                    <div class="bg-white p-8 rounded-xl shadow-md">
-                        <h3 class="text-xl font-bold text-navy mb-6">Leadership & Involvement</h3>
-                        
-                        <div class="space-y-6">
-                            <div>
-                                <h4 class="font-bold text-gray-700">President, Code Education</h4>
-                                <p class="text-gray-600">Lead workshops teaching programming fundamentals to 100+ students annually</p>
-                            </div>
-                            
-                            <div>
-                                <h4 class="font-bold text-gray-700">Society of Women Engineers (SWE)</h4>
-                                <p class="text-gray-600">Organized tech panels and mentorship programs for female STEM students</p>
-                            </div>
-                            
-                            <div>
-                                <h4 class="font-bold text-gray-700">National Society of Black Engineers (NSBE)</h4>
-                                <p class="text-gray-600">Participated in hackathons and professional development workshops</p>
-                            </div>
-                            
-                            <div>
-                                <h4 class="font-bold text-gray-700">Computer Graphics Society (CGS)</h4>
-                                <p class="text-gray-600">Explored computer vision and graphics programming techniques</p>
-                            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <!-- Education -->
+                <div class="bg-gray-700 p-6 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center">
+                        <i data-feather="book" class="mr-2 text-blue-400"></i> Education
+                    </h3>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="text-xl font-semibold">Florida State University</h4>
+                            <p class="text-gray-400">Bachelor of Science in Computer Science</p>
+                            <p class="text-gray-400">2019 - 2023</p>
+                            <p class="mt-2">Specialized in Artificial Intelligence and Cybersecurity</p>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold">MITx</h4>
+                            <p class="text-gray-400">Machine Learning with Python: from Linear Models to Deep Learning</p>
+                            <p class="text-gray-400">2022</p>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-    <!-- Skills Section -->
-    <section class="py-20 bg-gradient-to-b from-light to-white relative overflow-hidden">
-        <div class="absolute -bottom-20 -right-20 w-64 h-64 rounded-full bg-secondary/10 blur-3xl"></div>
-        <div class="absolute -top-20 -left-20 w-64 h-64 rounded-full bg-accent/10 blur-3xl"></div>
-<div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-3xl font-bold text-navy mb-12 text-center">Skills</h2>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <!-- Languages -->
-                <div class="bg-white p-6 rounded-xl shadow-md">
-                    <h3 class="font-bold text-navy mb-4 flex items-center">
-                        <i data-feather="code" class="mr-2 text-softblue"></i> Languages
+
+                <!-- Certifications -->
+                <div class="bg-gray-700 p-6 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center">
+                        <i data-feather="award" class="mr-2 text-blue-400"></i> Certifications
                     </h3>
-                    <ul class="space-y-2">
-                        <li class="flex items-center">
-                            <i data-feather="chevron-right" class="text-softblue mr-2"></i>
-                            <span>C++</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-feather="chevron-right" class="text-softblue mr-2"></i>
-                            <span>Python</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-feather="chevron-right" class="text-softblue mr-2"></i>
-                            <span>TypeScript</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-feather="chevron-right" class="text-softblue mr-2"></i>
-                            <span>Java</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-feather="chevron-right" class="text-softblue mr-2"></i>
-                            <span>JavaScript</span>
-                        </li>
-                    </ul>
-</div>
-                
-                <!-- Frameworks -->
-                <div class="bg-white p-6 rounded-xl shadow-md">
-                    <h3 class="font-bold text-navy mb-4 flex items-center">
-                        <i data-feather="layers" class="mr-2 text-softblue"></i> Frameworks
-                    </h3>
-                    <ul class="space-y-2">
-                        <li class="flex items-center">
-                            <i data-feather="chevron-right" class="text-softblue mr-2"></i>
-                            <span>Jenkins</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-feather="chevron-right" class="text-softblue mr-2"></i>
-                            <span>Angular</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-feather="chevron-right" class="text-softblue mr-2"></i>
-                            <span>Android Studio</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-feather="chevron-right" class="text-softblue mr-2"></i>
-                            <span>React</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-feather="chevron-right" class="text-softblue mr-2"></i>
-                            <span>Next.js</span>
-                        </li>
-                    </ul>
-</div>
-                
-                <!-- Tools -->
-                <div class="bg-white p-6 rounded-xl shadow-md">
-                    <h3 class="font-bold text-navy mb-4 flex items-center">
-                        <i data-feather="tool" class="mr-2 text-softblue"></i> Tools
-                    </h3>
-                    <ul class="space-y-2">
-                        <li class="flex items-center">
-                            <i data-feather="chevron-right" class="text-softblue mr-2"></i>
-                            <span>Git</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-feather="chevron-right" class="text-softblue mr-2"></i>
-                            <span>JIRA</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-feather="chevron-right" class="text-softblue mr-2"></i>
-                            <span>Postman</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-feather="chevron-right" class="text-softblue mr-2"></i>
-                            <span>IntelliJ IDEA</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-feather="chevron-right" class="text-softblue mr-2"></i>
-                            <span>VS Code</span>
-                        </li>
-                    </ul>
-</div>
-                
-                <!-- Soft Skills -->
-                <div class="bg-white p-6 rounded-xl shadow-md">
-                    <h3 class="font-bold text-navy mb-4 flex items-center">
-                        <i data-feather="users" class="mr-2 text-softblue"></i> Soft Skills
-                    </h3>
-                    <ul class="space-y-2">
-                        <li class="flex items-center">
-                            <i data-feather="chevron-right" class="text-softblue mr-2"></i>
-                            <span>Leadership - Leading teams through complex projects</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-feather="chevron-right" class="text-softblue mr-2"></i>
-                            <span>Communication - Clear technical and non-technical communication</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-feather="chevron-right" class="text-softblue mr-2"></i>
-                            <span>Problem-Solving - Breaking down complex technical challenges</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-feather="chevron-right" class="text-softblue mr-2"></i>
-                            <span>Mentorship - Guiding junior developers</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-feather="chevron-right" class="text-softblue mr-2"></i>
-                            <span>Team Building - Fostering collaborative environments</span>
-                        </li>
-                    </ul>
-</div>
-            </div>
-        </div>
-    </section>
-    <!-- Mission & Values Section -->
-    <section class="py-20 bg-gradient-to-r from-dark to-primary text-light relative overflow-hidden border-t border-b border-primary/20">
-<div class="absolute top-0 left-0 w-full h-full opacity-10">
-            <div class="absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-white blur-xl"></div>
-            <div class="absolute bottom-1/3 right-1/3 w-40 h-40 rounded-full bg-white blur-xl"></div>
-        </div>
-<div class="max-w-4xl mx-auto px-6 text-center">
-            <i data-feather="quote" class="w-12 h-12 mx-auto text-softblue mb-6"></i>
-                <blockquote class="text-2xl font-medium mb-8 text-accent">
-"Technology is powerful, but people make it meaningful."
-            </blockquote>
-            <div class="max-w-2xl mx-auto">
-                <p class="text-gray-300 mb-6">
-                    I believe that the true value of technology lies in how it improves lives and connects communities. 
-                    This philosophy drives my approach to software engineering and my commitment to mentorship.
-                </p>
-                <p class="text-gray-300">
-                    Whether I'm teaching coding workshops, leading student organizations, or contributing to open-source projects, 
-                    I aim to create technology that empowers others. Seeing someone light up when they solve their first 
-                    programming challenge is just as rewarding as shipping production code.
-                </p>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="text-xl font-semibold">Certified Ethical Hacker (CEH)</h4>
+                            <p class="text-gray-400">EC-Council, 2023</p>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold">TensorFlow Developer Certificate</h4>
+                            <p class="text-gray-400">Google, 2022</p>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold">CompTIA Security+</h4>
+                            <p class="text-gray-400">2021</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-white">
-        <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-3xl font-bold text-navy mb-12 text-center">Let's Connect</h2>
+    <section id="contact" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold mb-12 text-center">Get In Touch</h2>
             
-            <div class="flex flex-col md:flex-row gap-12">
+            <div class="flex flex-col md:flex-row gap-12 max-w-6xl mx-auto">
                 <div class="md:w-1/2">
-                    <p class="text-gray-600 mb-8 text-xl">
-                        Let's connect and build something great! I'm always open to discussing new projects, 
-                        creative ideas, or opportunities to be part of your vision.
+                    <h3 class="text-2xl font-bold mb-6">Let's Collaborate</h3>
+                    <p class="text-lg mb-8">
+                        Interested in discussing defense technology, AI integration, or potential collaborations? Feel free to reach out through any of these channels.
                     </p>
                     
-                    <div class="space-y-6">
+                    <div class="space-y-4">
                         <div class="flex items-center">
-                            <div class="bg-gray-100 p-3 rounded-full mr-4">
-                                <i data-feather="mail" class="text-softblue"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-700">Email</h4>
-                                <a href="mailto:betty.phipps@example.com" class="text-gray-600 hover:text-navy">betty.phipps@example.com</a>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-center">
-                            <div class="bg-gray-100 p-3 rounded-full mr-4">
-                                <i data-feather="linkedin" class="text-softblue"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-700">LinkedIn</h4>
-                                <a href="#" class="text-gray-600 hover:text-navy">linkedin.com/in/bettyphipps</a>
-                            </div>
+                            <i data-feather="mail" class="mr-4 text-blue-400"></i>
+                            <span>betty.phipps@example.com</span>
                         </div>
                         <div class="flex items-center">
-                            <div class="bg-gray-100 p-3 rounded-full mr-4">
-                                <i data-feather="github" class="text-softblue"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-700">GitHub</h4>
-                                <a href="https://github.com/bettyphipps" class="text-gray-600 hover:text-navy">github.com/bettyphipps</a>
-                            </div>
+                            <i data-feather="phone" class="mr-4 text-blue-400"></i>
+                            <span>(555) 123-4567</span>
                         </div>
                         <div class="flex items-center">
-                            <div class="bg-gray-100 p-3 rounded-full mr-4">
-                                <i data-feather="book" class="text-softblue"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-700">Blog</h4>
-                                <a href="https://medium.com/@bettyphipps" class="text-gray-600 hover:text-navy">medium.com/@bettyphipps</a>
-                            </div>
+                            <i data-feather="map-pin" class="mr-4 text-blue-400"></i>
+                            <span>Tallahassee, FL</span>
                         </div>
                     </div>
-</div>
-                
+
+                    <div class="mt-8 flex space-x-4">
+                        <a href="#" class="p-3 bg-gray-800 rounded-full hover:bg-gray-700 transition-all">
+                            <i data-feather="github"></i>
+                        </a>
+                        <a href="#" class="p-3 bg-gray-800 rounded-full hover:bg-gray-700 transition-all">
+                            <i data-feather="linkedin"></i>
+                        </a>
+                        <a href="#" class="p-3 bg-gray-800 rounded-full hover:bg-gray-700 transition-all">
+                            <i data-feather="twitter"></i>
+                        </a>
+                        <a href="#" class="p-3 bg-gray-800 rounded-full hover:bg-gray-700 transition-all">
+                            <i data-feather="file-text"></i>
+                        </a>
+                    </div>
+                </div>
+
                 <div class="md:w-1/2">
-                    <form class="bg-gray-50 p-8 rounded-xl shadow-md">
-                        <div class="mb-6">
-                            <label for="name" class="block text-gray-700 font-medium mb-2">Name</label>
-                            <input type="text" id="name" class="w-full px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-softblue focus:border-transparent">
+                    <form class="space-y-6">
+                        <div>
+                            <label for="name" class="block mb-2">Name</label>
+                            <input type="text" id="name" class="w-full px-4 py-3 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
-                        
-                        <div class="mb-6">
-                            <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
-                            <input type="email" id="email" class="w-full px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-softblue focus:border-transparent">
+                        <div>
+                            <label for="email" class="block mb-2">Email</label>
+                            <input type="email" id="email" class="w-full px-4 py-3 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
-                        
-                        <div class="mb-6">
-                            <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
-                            <textarea id="message" rows="5" class="w-full px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-softblue focus:border-transparent"></textarea>
+                        <div>
+                            <label for="message" class="block mb-2">Message</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-3 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
                         </div>
-                        
-                        <button type="submit" class="bg-navy text-white px-6 py-3 rounded-md hover:bg-charcoal transition w-full">
+                        <button type="submit" class="px-8 py-3 bg-blue-600 rounded-full font-bold hover:bg-blue-700 transition-all w-full md:w-auto">
                             Send Message
                         </button>
                     </form>
@@ -662,140 +475,45 @@ Defense software engineer specializing in AI integration for mission-critical sy
             </div>
         </div>
     </section>
-    <!-- Custom Footer -->
+
     <custom-footer></custom-footer>
-    <script src="components/navbar.js"></script>
-    <script src="components/footer.js"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-<script>
-        // Initialize animations
+
+    <script>
+        feather.replace();
+        VANTA.GLOBE({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x1aff9c,
+            backgroundColor: 0x0d1a2e,
+            size: 1.50,
+            rings: 12,
+            maxDistance: 30,
+            spacing: 20,
+            animationSpeed: 1.5
+        });
+
+        // Add scroll animation observer
         document.addEventListener('DOMContentLoaded', function() {
-            feather.replace();
-            
-            // Initialize particles.js with space theme
-            particlesJS('particles-js', {
-                particles: {
-                    number: { value: 120, density: { enable: true, value_area: 800 } },
-                    color: { value: "#e63946" },
-                    shape: { 
-                        type: ["circle", "triangle", "star"],
-                        stroke: { width: 0, color: "#000000" },
-                        polygon: { nb_sides: 5 }
-                    },
-                    opacity: { 
-                        value: 0.7, 
-                        random: true,
-                        anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }
-                    },
-                    size: { 
-                        value: 4, 
-                        random: true,
-                        anim: { enable: true, speed: 2, size_min: 0.1, sync: false }
-                    },
-                    line_linked: { 
-                        enable: true, 
-                        distance: 150, 
-                        color: "#e63946", 
-                        opacity: 0.4, 
-                        width: 1.5 
-                    },
-                    move: { 
-                        enable: true, 
-                        speed: 3, 
-                        direction: "none", 
-                        random: true, 
-                        straight: false, 
-                        out_mode: "bounce",
-                        bounce: true,
-                        attract: { enable: true, rotateX: 600, rotateY: 1200 }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
                     }
-                },
-interactivity: {
-                    detect_on: "canvas",
-                    events: {
-                        onhover: { enable: true, mode: "repulse" },
-                        onclick: { enable: true, mode: "push" }
-                    }
-                }
-            });
-
-            // GSAP animations
-            gsap.from("nav", { 
-                y: -50, 
-                opacity: 0, 
-                duration: 0.8, 
-                ease: "power2.out" 
-            });
-
-            gsap.from("#hero h1", { 
-                y: 50, 
-                opacity: 0, 
-                duration: 0.8, 
-                delay: 0.2, 
-                ease: "back.out(1.7)" 
-            });
-
-            gsap.from("#hero h2, #hero p", { 
-                y: 30, 
-                opacity: 0, 
-                duration: 0.6, 
-                delay: 0.4, 
-                stagger: 0.1 
-            });
-
-            gsap.from("#hero img", { 
-                scale: 0.5, 
-                opacity: 0, 
-                duration: 1, 
-                delay: 0.6, 
-                ease: "elastic.out(1, 0.5)" 
-            });
-
-            // Scroll animations
-            gsap.utils.toArray("section").forEach(section => {
-                gsap.from(section, {
-                    scrollTrigger: {
-                        trigger: section,
-                        start: "top 80%",
-                        toggleActions: "play none none none"
-                    },
-                    y: 50,
-                    opacity: 0,
-                    duration: 0.8
                 });
-            });
+            }, { threshold: 0.1 });
 
-            // Hover effects
-            document.querySelectorAll(".skill-card").forEach(card => {
-                card.addEventListener("mouseenter", () => {
-                    gsap.to(card, { 
-                        y: -10, 
-                        rotation: 2, 
-                        duration: 0.3 
-                    });
-                });
-                card.addEventListener("mouseleave", () => {
-                    gsap.to(card, { 
-                        y: 0, 
-                        rotation: 0, 
-                        duration: 0.3 
-                    });
-                });
-            });
-
-            // Smooth scrolling
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    gsap.to(window, {
-                        duration: 1,
-                        scrollTo: this.getAttribute('href'),
-                        ease: "power2.inOut"
-                    });
-                });
+            document.querySelectorAll('.slide-in').forEach(el => {
+                observer.observe(el);
             });
         });
-    </script>
+</script>
+    <script src="script.js"></script>
 <script src="https://deepsite.hf.co/deepsite-badge.js"></script>
 </body>
 </html>
